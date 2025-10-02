@@ -1,5 +1,6 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+import 'package:health_bridge/patient_dashboard/my_logs.dart';
 import 'package:health_bridge/patient_dashboard/scan_prescription.dart';
 
 class PatientDashboard extends StatefulWidget {
@@ -36,7 +37,10 @@ class _PatientDashboardState extends State<PatientDashboard> {
             const SizedBox(height: 20),
             ElevatedButton.icon(
               onPressed: () {
-                // TODO: Implement view logs functionality
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const MyLogsScreen()),
+                );
               },
               icon: const Icon(Icons.notes),
               label: const Text('My Logs'),

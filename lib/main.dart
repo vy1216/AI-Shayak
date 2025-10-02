@@ -1,61 +1,30 @@
+
 import 'package:flutter/material.dart';
-import 'package:health_bridge/patient_dashboard/patient_dashboard.dart';
-import 'package:health_bridge/doctor_dashboard/doctor_dashboard.dart';
+import 'package:health_bridge/auth/auth_screen.dart';
+import 'package:health_bridge/patient_dashboard/patient_dashboard_screen.dart';
+import 'package:health_bridge/doctor_dashboard/doctor_dashboard_screen.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const HealthBridgeApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+class HealthBridgeApp extends StatelessWidget {
+  const HealthBridgeApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Health Bridge',
+      title: 'HealthBridge',
       theme: ThemeData(
         primarySwatch: Colors.blue,
+        visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: const HomePage(),
-    );
-  }
-}
-
-class HomePage extends StatelessWidget {
-  const HomePage({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Health Bridge'),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const PatientDashboard()),
-                );
-              },
-              child: const Text('Patient Dashboard'),
-            ),
-            const SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const DoctorDashboard()),
-                );
-              },
-              child: const Text('Doctor Dashboard'),
-            ),
-          ],
-        ),
-      ),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => const AuthScreen(),
+        '/patient_dashboard': (context) => const PatientDashboardScreen(),
+        '/doctor_dashboard': (context) => const DoctorDashboardScreen(),
+      },
     );
   }
 }
