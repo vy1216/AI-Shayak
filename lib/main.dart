@@ -1,30 +1,25 @@
 
 import 'package:flutter/material.dart';
-import 'package:health_bridge/auth/auth_screen.dart';
-import 'package:health_bridge/patient_dashboard/patient_dashboard_screen.dart';
-import 'package:health_bridge/doctor_dashboard/doctor_dashboard_screen.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:health_bridge/wrapper.dart';
 
-void main() {
-  runApp(const HealthBridgeApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  runApp(const MyApp());
 }
 
-class HealthBridgeApp extends StatelessWidget {
-  const HealthBridgeApp({super.key});
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'HealthBridge',
+      title: 'Patient-Doctor Bridge',
       theme: ThemeData(
         primarySwatch: Colors.blue,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      initialRoute: '/',
-      routes: {
-        '/': (context) => const AuthScreen(),
-        '/patient_dashboard': (context) => const PatientDashboardScreen(),
-        '/doctor_dashboard': (context) => const DoctorDashboardScreen(),
-      },
+      home: const Wrapper(),
     );
   }
 }
